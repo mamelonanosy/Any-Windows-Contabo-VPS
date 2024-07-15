@@ -3,13 +3,17 @@ Easy installation of any version of Windows for your Contabo VPS.
 
 ## Introduction
 
-This guide provides step-by-step instructions for installing Windows 10 on a Contabo VPS. Please be aware that you assume full responsibility for all risks associated with this installation.
+This guide provides step-by-step instructions for installing any version of Windows on a Contabo VPS.
+Please be aware that you assume full responsibility for all risks associated with this installation.
 
 ## Prerequisites
 
 - VNC Viewer application installed. Download it from [here](https://www.realvnc.com/en/connect/download/viewer/).
 - A Contabo VPS
 - Microsoft Remote Desktop for RDP connection to the machine.
+- Putty application installed on Windows. Download it from [here](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html).
+- Optionally, you can install the following programs (if you have downloaded the .iso images):
+  WinSCP Download it from [here](https://winscp.net/eng/download.php).
 
 ## Steps for installation
 
@@ -31,7 +35,7 @@ This guide provides step-by-step instructions for installing Windows 10 on a Con
 - Execute the following commands:
   - `apt install git -y`
   - `git clone https://github.com/JaRufoMarquez/Any-Windows-Contabo-VPS.git`
-  - `cd Windows-Server-Contabo-VPS`
+  - `cd Any-Windows-Contabo-VPS`
   - `chmod +x windows-install.sh`
   - `./windows-install.sh`
   - The process takes approximately 15 minutes and completes when the ssh session disconnects due to the machine rebooting.
