@@ -1,4 +1,3 @@
-
 # Any-Windows-Contabo-VPS - Installation Guide
 Easy installation of any version of Windows for your Contabo VPS.
 
@@ -31,7 +30,7 @@ This guide provides step-by-step instructions for installing Windows 10 on a Con
 - Log in with the command `ssh root@<MACHINE-IP>` and enter your Rescue System password.
 - Execute the following commands:
   - `apt install git -y`
-  - `git clone https://github.com/Ghostyenc/Windows-Server-Contabo-VPS.git`
+  - `git clone https://github.com/JaRufoMarquez/Any-Windows-Contabo-VPS.git`
   - `cd Windows-Server-Contabo-VPS`
   - `chmod +x windows-install.sh`
   - `./windows-install.sh`
