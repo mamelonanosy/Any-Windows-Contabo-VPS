@@ -27,17 +27,17 @@ parted /dev/sda --script -- mkpart primary ntfs 1MB ${part_size_mb}MB
 parted /dev/sda --script -- mkpart primary ntfs ${part_size_mb}MB 100%
 
 echo "---------------- Inform kernel of partition table changes ---------------- "
-sudo partprobe /dev/sda
+partprobe /dev/sda
 
-sleep 90
+sleep 60
 
 partprobe /dev/sda
 
-sleep 90
+sleep 60
 
 partprobe /dev/sda
 
-sleep 90 
+sleep 60 
 
 echo "---------------- Verify partitions ---------------- "
 fdisk -l /dev/sda
