@@ -179,31 +179,6 @@ touch cmd.txt
 
 echo 'add virtio /virtio_drivers' >> cmd.txt
 
-# List images in boot.wim
-echo "*** List images in boot.wim ***"
-wimlib-imagex info boot.wim
+wimlib-imagex update boot.wim 2 < cmd.txt
 
-# Prompt user to enter a valid image index
-echo "Please enter a valid image index from the list above:"
-read image_index
-echo "List images in boot.wim finish ***"
-
-# Check if boot.wim exists before updating
-echo "*** Rebooting the system... ***"
-if [ -f boot.wim ]; then
-    wimlib-imagex update boot.wim $image_index < cmd.txt
-    echo "Install linux-image-amd64 finish ***"
-else
-    echo "boot.wim not found"
-    read -p "Press any key to exit..." -n1 -s
-    exit 1
-fi
-
-# Ask if the user wants to reboot
-read -p "Do you want to reboot the system now? (Y/N): " reboot_choice
-
-if [[ "$reboot_choice" == "Y" || "$reboot_choice" == "y" ]]; then
-    sudo reboot
-else
-    echo "Continuing without rebooting"
-fi
+reboot
