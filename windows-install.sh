@@ -22,22 +22,21 @@ disk_size_mb=$((disk_size_gb * 1024))
 echo "Get the disk size in GB and convert to MB finish ***"
 
 echo "*** Define partition sizes ***"
-part1_size_mb=$((15 * 1024)) # 15 GB in MB
-part2_size_mb=$((17 * 1024)) # 17 GB in MB
+part1_size_mb=$((70 * 1024)) # 70 GB in MB
+part2_size_mb=$((80 * 1024)) # 80 GB in MB
 part2_start_mb=$((part1_size_mb + 1)) # Start of the second partition
 
 echo "*** Create GPT partition table ***"
 parted /dev/sda --script -- mklabel gpt
 echo "Create GPT partition table finish ***"
 
-echo "*** Create first partition (15 GB) ***"
+echo "*** Create first partition (70 GB) ***"
 parted /dev/sda --script -- mkpart primary ntfs 1MB ${part1_size_mb}MB
-echo "Create first partition (15 GB) finish ***"
+echo "Create first partition (70 GB) finish ***"
 
-echo "*** Create second partition (17 GB) ***"
+echo "*** Create second partition (80 GB) ***"
 parted /dev/sda --script -- mkpart primary ntfs ${part2_start_mb}MB $((part2_start_mb + part2_size_mb - 1))MB
-echo "Create second partition (17 GB) finish ***"
-
+echo "Create second partition (80 GB) finish ***"
 
 echo "*** Inform kernel of partition table changes ***"
 partprobe /dev/sda
