@@ -23,13 +23,6 @@ part2_start_mb=$((part1_size_mb + 1)) # Start of the second partition
 echo "*** Create GPT partition table ***"
 parted /dev/sda --script -- mklabel gpt
 echo "Create GPT partition table finish ***"
-
-echo "*** Create two partitions ***"
-parted /dev/sda --script -- mkpart primary ntfs 1MB ${part_size_mb}MB
-echo "Create first partitions"
-parted /dev/sda --script -- mkpart primary ntfs ${part_size_mb}MB 100%
-echo "Create second partitions"
-echo "Create two partitions finish ***"
 echo "*** Create first partition (15 GB) ***"
 parted /dev/sda --script -- mkpart primary ntfs 1MB ${part1_size_mb}MB
 echo "Create first partition (15 GB) finish ***"
