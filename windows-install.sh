@@ -15,23 +15,18 @@ echo "*** Get the disk size in GB and convert to MB ***"
 disk_size_gb=$(parted /dev/sda --script print | awk '/^Disk \/dev\/sda:/ {print int($3)}')
 disk_size_mb=$((disk_size_gb * 1024))
 echo "Get the disk size in GB and convert to MB finish ***"
-echo "*** Define partition sizes ***"
-part1_size_mb=$((20 * 1024)) # 20 GB in MB
-part2_size_mb=$((30 * 1024)) # 30 GB in MB
-part2_start_mb=$((part1_size_mb + 1)) # Start of the second partition
-
+echo "*** Calculate partition size (50% of total size) ***"
+part_size_mb=$((disk_size_mb / 2))
+echo "Calculate partition size (50% of total size) finish ***"
 echo "*** Create GPT partition table ***"
 parted /dev/sda --script -- mklabel gpt
 echo "Create GPT partition table finish ***"
-echo "*** Create first partition (15 GB) ***"
-parted /dev/sda --script -- mkpart primary ntfs 1MB ${part1_size_mb}MB
-echo "Create first partition (15 GB) finish ***"
-
-echo "*** Create second partition (17 GB) ***"
-parted /dev/sda --script -- mkpart primary ntfs ${part2_start_mb}MB $((part2_start_mb + part2_size_mb - 1))MB
-echo "Create second partition (17 GB) finish ***"
-
-
+echo "*** Create two partitions ***"
+parted /dev/sda --script -- mkpart primary ntfs 1MB ${part_size_mb}MB
+echo "Create first partitions"
+parted /dev/sda --script -- mkpart primary ntfs ${part_size_mb}MB 100%
+echo "Create second partitions"
+echo "Create two partitions finish ***"
 echo "*** Inform kernel of partition table changes ***"
 partprobe /dev/sda
 sleep 60
@@ -150,6 +145,8 @@ else
 fi
 cd /mnt/sources
 touch cmd.txt
+
 echo 'add virtio /virtio_drivers' >> cmd.txt
 wimlib-imagex update boot.wim 2 < cmd.txt
+
 reboot
